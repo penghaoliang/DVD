@@ -1,0 +1,28 @@
+package com.dvd.JComPz;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.JComboBox;
+
+import com.dvd.dao.Dao;
+import com.dvd.model.DVDType;
+
+public class MapPz {
+	static Map map = new HashMap();
+
+	public static Map getMap() {
+		List list = Dao.selectDVDCategory();
+		for (int i = 0; i < list.size(); i++) {
+			DVDType booktype = (DVDType) list.get(i);
+
+			Item item = new Item();
+			item.setId(booktype.getId());
+			item.setName(booktype.getTypeName());
+			map.put(item.getId(), item);
+
+		}
+		return map;
+	}
+}
